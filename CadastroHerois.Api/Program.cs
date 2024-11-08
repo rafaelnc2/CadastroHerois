@@ -1,16 +1,21 @@
 using CadastroHerois.Api.Endpoints;
 using CadastroHerois.Api.Extensions;
+using CadastroHerois.Api.Middlewares;
+using Microsoft.AspNetCore.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddServices(builder.Configuration);
 
+builder.Services.AddExceptionHandler<GlobalErrorHandler>();
+
 var app = builder.Build();
+
+app.UseExceptionHandler(opt => { });
 
 app.MapHerosEndpoints();
 

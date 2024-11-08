@@ -5,5 +5,5 @@ namespace CadastroHerois.Api.Interfaces;
 
 public interface IUpdateHero
 {
-    Task<UpdateHeroOutput> ExecuteAsync(int Id, UpdateHeroInput input);
+    Task<ApiDefaultOutput<UpdateHeroOutput>> ExecuteAsync(int Id, UpdateHeroInput input);
 }

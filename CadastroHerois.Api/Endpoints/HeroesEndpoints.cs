@@ -5,11 +5,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CadastroHerois.Api.Endpoints;
 
-public static class HerosEndpoints
+public static class HeroesEndpoints
 {
     public static void MapHerosEndpoints(this WebApplication app)
     {
-        app.MapPost("/heros", async (ICreateHero createHero, CreateHeroInput input) =>
+        var group = app.MapGroup("heroes");
+        
+        group.MapPost("/", async (ICreateHero createHero, CreateHeroInput input) =>
             {
                 var insertId = await createHero.ExecuteAsync(input);
                 
@@ -18,9 +20,7 @@ public static class HerosEndpoints
         .WithName("CreateNewHeroAsync")
         .WithOpenApi();
         
-        app.MapPut("/heros/{id:int}", async (
-                [FromServices] IUpdateHero updateHero, 
-                int id, 
+        group.MapPut("/{id:int}", async ([FromServices] IUpdateHero updateHero, int id, 
                 [FromBody] UpdateHeroInput input) =>
             {
                 var updatedHero = await updateHero.ExecuteAsync(id, input);
@@ -31,7 +31,7 @@ public static class HerosEndpoints
             .WithOpenApi();
         
         
-        app.MapGet("/heros/{id:int}", async ([FromServices] IGetHeroById getHeroById, [FromRoute] int id) =>
+        group.MapGet("/{id:int}", async ([FromServices] IGetHeroById getHeroById, [FromRoute] int id) =>
             {
                 var input = new GetHeroByIdInput(id);
                 var hero = await getHeroById.ExecuteAsync(input);
@@ -41,11 +41,11 @@ public static class HerosEndpoints
         .WithName("GetHeroByIdAsync")
         .WithOpenApi();
         
-        app.MapGet("/heros", async ([FromServices] IGetAllHeroes getAllHeroes) =>
+        group.MapGet("/", async ([FromServices] IGetAllHeroes getAllHeroes) =>
             {
-                var heros = await getAllHeroes.ExecuteAsync();
+                var heroes = await getAllHeroes.ExecuteAsync();
 
-                return Results.Ok(heros);
+                return Results.Ok(heroes);
             })
             .WithName("GetAllHeroesAsync")
             .WithOpenApi();

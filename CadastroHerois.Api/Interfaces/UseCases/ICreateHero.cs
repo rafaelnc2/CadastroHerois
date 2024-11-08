@@ -1,8 +1,9 @@
 using CadastroHerois.Api.Inputs;
+using CadastroHerois.Api.Outputs;
 
 namespace CadastroHerois.Api.Interfaces;
 
 public interface ICreateHero
 {
-    Task<int> ExecuteAsync(CreateHeroInput input);
+    Task<ApiDefaultOutput<int>> ExecuteAsync(CreateHeroInput input);
 }
