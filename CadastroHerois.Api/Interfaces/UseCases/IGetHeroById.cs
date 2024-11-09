@@ -5,5 +5,5 @@ namespace CadastroHerois.Api.Interfaces;
 
 public interface IGetHeroById
 {
-    Task<GetHeroByIdOutput> ExecuteAsync(GetHeroByIdInput input);
+    Task<ApiDefaultOutput<GetHeroByIdOutput>> ExecuteAsync(GetHeroByIdInput input);
 }

@@ -7,8 +7,10 @@ namespace CadastroHerois.Api.UseCases.Heroes;
 
 public class UpdateHero(IHeroRepository repository) : IUpdateHero
 {
-    public async Task<UpdateHeroOutput> ExecuteAsync(int id, UpdateHeroInput input)
+    public async Task<ApiDefaultOutput<UpdateHeroOutput>> ExecuteAsync(int id, UpdateHeroInput input)
     {
+        var response = new ApiDefaultOutput<UpdateHeroOutput>();
+        
         var hero = await repository.GetByIdAsync(id);
         
         hero.Update(input.Name, input.SecretName, input.Age, input.Universe);
@@ -17,6 +19,6 @@ public class UpdateHero(IHeroRepository repository) : IUpdateHero
         
         var output = new UpdateHeroOutput(hero.Id, hero.Name, hero.SecretName, hero.Age, hero.Universe, hero.UpdateDate!.Value);
 
-        return output;
+        return response.OkResponse(output);
     }
 }
