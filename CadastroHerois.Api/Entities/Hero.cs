@@ -68,6 +68,8 @@ public class Hero : Entity
 
     public void Update(string name, string secretName, int age, string universe)
     {
+        Validate(name, secretName, age, universe);
+        
         Name = name;
         SecretName = secretName;
         Age = age;
