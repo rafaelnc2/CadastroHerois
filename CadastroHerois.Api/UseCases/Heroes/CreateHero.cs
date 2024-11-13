@@ -14,7 +14,10 @@ public class CreateHero(IHeroRepository repository) : ICreateHero
         
         var hero = Hero.Create(input.Name, input.SecretName, input.Age, input.Universe);
 
-        var insertedId = await repository.SaveAsync(hero);
+        if (hero?.IsValid is false)
+            return response.BadRequestResponse(hero.Errors());
+        
+        var insertedId = await repository.SaveAsync(hero!);
         
         return response.CreatedResponse(insertedId);
     }

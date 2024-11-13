@@ -15,6 +15,9 @@ public class UpdateHero(IHeroRepository repository) : IUpdateHero
         
         hero.Update(input.Name, input.SecretName, input.Age, input.Universe);
 
+        if (hero.IsValid is false)
+            return response.BadRequestResponse(hero.Errors());
+        
         await repository.UpdateAsync(hero);
         
         var output = new UpdateHeroOutput(hero.Id, hero.Name, hero.SecretName, hero.Age, hero.Universe, hero.UpdateDate!.Value);
