@@ -9,6 +9,9 @@ public abstract class Entity
     
     public IReadOnlyList<string> Errors() => _errors;
     
+    public DateTime CreateDate { get; protected set; }
+    public DateTime? UpdateDate { get; protected set; }
+    
     [Computed]
     public bool IsValid
     {

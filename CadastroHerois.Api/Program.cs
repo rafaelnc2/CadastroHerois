@@ -1,7 +1,6 @@
 using CadastroHerois.Api.Endpoints;
 using CadastroHerois.Api.Extensions;
 using CadastroHerois.Api.Middlewares;
-using Microsoft.AspNetCore.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
 

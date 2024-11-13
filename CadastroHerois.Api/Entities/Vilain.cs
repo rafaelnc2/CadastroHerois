@@ -1,36 +1,29 @@
-using System.Runtime.InteropServices.JavaScript;
-using Dapper.Contrib.Extensions;
-
 namespace CadastroHerois.Api.Entities;
 
-//https://github.com/DapperLib/Dapper.Contrib
-
-[Table ("Herois")]
-public class Hero : Entity
+public class Vilain : Entity
 {
     private const int NameMinLength = 3;
     private const int NameMaxLength = 50;
     
-    private Hero(int id, string name, string secretName, int age, string universe, DateTime createDate, DateTime? updateDate)
+    private Vilain(int id, string name, string secretName, int whichHeroId, string universe, DateTime createDate, DateTime? updateDate)
     {
         Id = id;
         Name = name;
         SecretName = secretName;
-        Age = age;
+        WhichHeroId = whichHeroId;
         Universe = universe;
+        
         CreateDate = createDate;
         UpdateDate = updateDate;
     }
-    
-    [Key]
+
     public int Id { get; private set; }
     public string Name { get; private set; }
     public string SecretName { get; private set; }
-    public int Age { get; private set; }
+    public int WhichHeroId { get; private set; }
     public string Universe { get; private set; }
 
-
-    private static void Validate(string name, string secretName, int age, string universe)
+    private static void Validate(string name, string secretName, int whichHeroId, string universe)
     {
         _errors.Clear();
         
@@ -40,45 +33,44 @@ public class Hero : Entity
         if (string.IsNullOrWhiteSpace(secretName) || secretName.Length < NameMinLength || secretName.Length > NameMaxLength)
             _errors.Add("Secret Name is invalid");
         
-        if (age == 0)
-            _errors.Add("Age is invalid");
+        if (whichHeroId == 0)
+            _errors.Add("Tell us which hero this villain belongs to");
         
         if (string.IsNullOrWhiteSpace(universe))
             _errors.Add("Universe is invalid");
     }
     
-    public static Hero? Create(string name, string secretName, int age, string universe)
+    public static Vilain? Create(string name, string secretName, int whichHeroId, string universe)
     {
-        Validate(name, secretName, age, universe);
+        Validate(name, secretName, whichHeroId, universe);
 
         if (_errors.Any())
             return null;
         
-        var hero = new Hero(
+        var vilain = new Vilain(
             id: 0,
-            name: name,
+            name: name, 
             secretName: secretName,
-            age: age,
+            whichHeroId: whichHeroId, 
             universe: universe,
             createDate: DateTime.Now,
             updateDate: null
         );
         
-        return hero;
+        return vilain;
     }
 
-    public void Update(string name, string secretName, int age, string universe)
+    public void Update(string name, string secretName, int whichHeroId, string universe)
     {
-        Validate(name, secretName, age, universe);
+        Validate(name, secretName, whichHeroId, universe);
 
         if (IsValid is false)
             return;
         
         Name = name;
         SecretName = secretName;
-        Age = age;
+        WhichHeroId = whichHeroId;
         Universe = universe;
-        
         UpdateDate = DateTime.Now;
     }
 }
