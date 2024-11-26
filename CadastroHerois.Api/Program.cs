@@ -1,7 +1,6 @@
 using CadastroHerois.Api.Endpoints;
 using CadastroHerois.Api.Extensions;
 using CadastroHerois.Api.Middlewares;
-using Microsoft.AspNetCore.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +17,8 @@ var app = builder.Build();
 app.UseExceptionHandler(opt => { });
 
 app.MapHerosEndpoints();
+
+app.MapVillainsEndpoints();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

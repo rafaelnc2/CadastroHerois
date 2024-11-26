@@ -11,9 +11,10 @@ public static class RootBootstrapper
 {
     public static IServiceCollection AddServices(this IServiceCollection services, IConfiguration configuration)
     {
+        // Add context
         services.AddScoped<IDbConnection>(db =>
             new SqlConnection(configuration.GetConnectionString("SqlServer")));
-
+        
         // Add Repositories
         services.AddScoped<IHeroRepository, HeroRepository>();
         
