@@ -1,11 +1,14 @@
+using Dapper.Contrib.Extensions;
+
 namespace CadastroHerois.Api.Entities;
 
-public class Vilain : Entity
+[Table ("Villains")]
+public class Villain : Entity
 {
     private const int NameMinLength = 3;
     private const int NameMaxLength = 50;
     
-    private Vilain(int id, string name, string secretName, int whichHeroId, string universe, DateTime createDate, DateTime? updateDate)
+    private Villain(int id, string name, string secretName, int whichHeroId, string universe, DateTime createDate, DateTime? updateDate)
     {
         Id = id;
         Name = name;
@@ -40,14 +43,14 @@ public class Vilain : Entity
             _errors.Add("Universe is invalid");
     }
     
-    public static Vilain? Create(string name, string secretName, int whichHeroId, string universe)
+    public static Villain? Create(string name, string secretName, int whichHeroId, string universe)
     {
         Validate(name, secretName, whichHeroId, universe);
 
         if (_errors.Any())
             return null;
         
-        var vilain = new Vilain(
+        var vilain = new Villain(
             id: 0,
             name: name, 
             secretName: secretName,

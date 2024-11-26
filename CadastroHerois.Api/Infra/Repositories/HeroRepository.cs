@@ -34,8 +34,8 @@ public class HeroRepository : IHeroRepository
         return _connection.GetAllAsync<Hero>();
     }
 
-    public Task DeleteAsync(int id)
+    public Task DeleteAsync(Hero hero)
     {
-        throw new NotImplementedException();
+        return _connection.DeleteAsync(hero);
     }
 }

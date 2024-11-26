@@ -5,7 +5,7 @@ namespace CadastroHerois.Api.Entities;
 
 //https://github.com/DapperLib/Dapper.Contrib
 
-[Table ("Herois")]
+[Table ("Heroes")]
 public class Hero : Entity
 {
     private const int NameMinLength = 3;

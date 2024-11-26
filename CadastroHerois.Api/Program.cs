@@ -18,6 +18,8 @@ app.UseExceptionHandler(opt => { });
 
 app.MapHerosEndpoints();
 
+app.MapVillainsEndpoints();
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

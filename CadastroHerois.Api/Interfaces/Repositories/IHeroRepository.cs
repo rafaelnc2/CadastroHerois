@@ -4,11 +4,11 @@ namespace CadastroHerois.Api.Interfaces.Repositories;
 
 public interface IHeroRepository
 {
-    Task<int> SaveAsync(Hero hero);
-    Task UpdateAsync(Hero hero);
+    Task<int> SaveAsync(Hero entity);
+    Task UpdateAsync(Hero entity);
     
     Task<Hero> GetByIdAsync(int id);
     Task<IEnumerable<Hero>> GetAllAsync();
     
-    Task DeleteAsync(int id);
+    Task DeleteAsync(Hero entity);
 }
