@@ -7,31 +7,14 @@ using Dapper.Contrib.Extensions;
 
 namespace CadastroHerois.Api.Infra.Repositories;
 
-public class VillainRepository : IVillainRepository
+public class VillainRepository : BaseRepository<Villain>, IVillainRepository
 {
-    private readonly IDbConnection _connection;
-
-    public VillainRepository(IDbConnection connection)
+    public VillainRepository(IDbConnection connection) : base(connection)
     {
-        _connection = connection;
+        
     }
 
-    public Task<int> SaveAsync(Villain entity)
-    {
-        return _connection.InsertAsync(entity);
-    }
-
-    public Task UpdateAsync(Villain entity)
-    {
-        return _connection.UpdateAsync(entity);
-    }
-
-    public Task<Villain> GetByIdAsync(int id)
-    {
-        return _connection.GetAsync<Villain>(id);
-    }
-
-    public async Task<IEnumerable<GetVillainByIdOutput>> GetAllAsync()
+    public async Task<IEnumerable<GetVillainByIdOutput>> GetAllVillainsAsync()
     {
         var sql = """
                     SELECT  vl.Id, 
@@ -49,9 +32,5 @@ public class VillainRepository : IVillainRepository
 
         return result;
     }
-    
-    public Task DeleteAsync(Villain entity)
-    {
-        return _connection.DeleteAsync(entity);
-    }
+
 }

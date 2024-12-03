@@ -10,7 +10,7 @@ public sealed class GetAllVillains(IVillainRepository repository, IHeroRepositor
     {
         var response = new ApiDefaultOutput<IEnumerable<GetVillainByIdOutput>>();
         
-        var villains = await repository.GetAllAsync();
+        var villains = await repository.GetAllVillainsAsync();
 
         return response.OkResponse(villains);
     }
