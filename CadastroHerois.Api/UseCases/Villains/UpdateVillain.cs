@@ -1,13 +1,15 @@
 using CadastroHerois.Api.Inputs;
-using CadastroHerois.Api.Interfaces;
+using CadastroHerois.Api.Inputs.Villains;
 using CadastroHerois.Api.Interfaces.Repositories;
+using CadastroHerois.Api.Interfaces.UseCases.Villains;
 using CadastroHerois.Api.Outputs;
+using CadastroHerois.Api.Outputs.Villains;
 
-namespace CadastroHerois.Api.UseCases.Vilains;
+namespace CadastroHerois.Api.UseCases.Villains;
 
 public sealed class UpdateVillain(IVillainRepository repository, IHeroRepository heroRepository) : IUpdateVillain
 {
-    public async Task<ApiDefaultOutput<UpdateVillainOutput>> ExecuteAsync(int id, UpdateVillainInput input)
+    public async Task<ApiDefaultOutput<UpdateVillainOutput>> ExecuteAsync(UpdateVillainInput input)
     {
         var response = new ApiDefaultOutput<UpdateVillainOutput>();
 
@@ -16,19 +18,19 @@ public sealed class UpdateVillain(IVillainRepository repository, IHeroRepository
         if(whichHero is null)
             return response.BadRequestResponse(["Invalid Hero Id"]);
         
-        var vilain = await repository.GetByIdAsync(id);
+        var villain = await repository.GetByIdAsync(input.Id);
         
-        if(vilain is null)
+        if(villain is null)
             return response.NotFoundResponse();
         
-        vilain.Update(input.Name, input.SecretName, input.WhichHeroId, input.Universe);
+        villain.Update(input.Name, input.SecretName, input.WhichHeroId, input.Universe);
 
-        if (vilain.IsValid is false)
-            return response.BadRequestResponse(vilain.Errors());
+        if (villain.IsValid is false)
+            return response.BadRequestResponse(villain.Errors());
         
-        await repository.UpdateAsync(vilain);
+        await repository.UpdateAsync(villain);
         
-        var output = new UpdateVillainOutput(vilain.Id, vilain.Name, vilain.SecretName, whichHero.Name, vilain.Universe, vilain.UpdateDate!.Value);
+        var output = new UpdateVillainOutput(villain.Id, villain.Name, villain.SecretName, whichHero.Name, villain.Universe, villain.UpdateDate!.Value);
 
         return response.OkResponse(output);
     }
