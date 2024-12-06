@@ -1,8 +1,5 @@
-using CadastroHerois.Api.Inputs;
 using CadastroHerois.Api.Inputs.Heores;
-using CadastroHerois.Api.Interfaces;
 using CadastroHerois.Api.Interfaces.UseCases.Heroes;
-using CadastroHerois.Api.UseCases.Heroes;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CadastroHerois.Api.Endpoints;

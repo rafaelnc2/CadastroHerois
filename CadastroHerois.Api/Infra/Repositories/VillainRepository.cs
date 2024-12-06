@@ -1,10 +1,5 @@
-using System.Data;
-using CadastroHerois.Api.Entities;
-using CadastroHerois.Api.Interfaces.Repositories;
-using CadastroHerois.Api.Outputs;
 using CadastroHerois.Api.Outputs.Villains;
 using Dapper;
-using Dapper.Contrib.Extensions;
 
 namespace CadastroHerois.Api.Infra.Repositories;
 

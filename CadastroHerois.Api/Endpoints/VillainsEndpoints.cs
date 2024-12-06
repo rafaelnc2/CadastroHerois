@@ -1,6 +1,4 @@
-using CadastroHerois.Api.Inputs;
 using CadastroHerois.Api.Inputs.Villains;
-using CadastroHerois.Api.Interfaces;
 using CadastroHerois.Api.Interfaces.UseCases.Villains;
 using Microsoft.AspNetCore.Mvc;
 

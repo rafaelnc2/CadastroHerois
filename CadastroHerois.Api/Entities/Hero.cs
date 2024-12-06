@@ -1,4 +1,3 @@
-using System.Runtime.InteropServices.JavaScript;
 using Dapper.Contrib.Extensions;
 
 namespace CadastroHerois.Api.Entities;

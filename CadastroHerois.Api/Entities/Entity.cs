@@ -1,4 +1,3 @@
-using System.ComponentModel.DataAnnotations.Schema;
 using Dapper.Contrib.Extensions;
 
 namespace CadastroHerois.Api.Entities;

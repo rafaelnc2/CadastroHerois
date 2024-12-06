@@ -1,8 +1,6 @@
 using System.Net;
 using System.Text.Json;
-using CadastroHerois.Api.Outputs;
 using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
 
 namespace CadastroHerois.Api.Middlewares;
 
