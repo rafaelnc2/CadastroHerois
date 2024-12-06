@@ -1,5 +1,7 @@
 using CadastroHerois.Api.Inputs;
+using CadastroHerois.Api.Inputs.Villains;
 using CadastroHerois.Api.Interfaces;
+using CadastroHerois.Api.Interfaces.UseCases.Villains;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CadastroHerois.Api.Endpoints;
@@ -19,10 +21,11 @@ public static class VillainsEndpoints
             .WithName("CreateNewVillainAsync")
             .WithOpenApi();
         
-        group.MapPut("/{id:int}", async ([FromServices] IUpdateVillain updateVillain, int id, 
-                [FromBody] UpdateVillainInput input) =>
+        group.MapPut("/{id:int}", async ([FromServices] IUpdateVillain updateVillain, int id, [FromBody] UpdateVillainInput input) =>
             {
-                var updatedHero = await updateVillain.ExecuteAsync(id, input);
+                input.SetId(id);
+                
+                var updatedHero = await updateVillain.ExecuteAsync(input);
 
                 return Results.Ok(updatedHero);
             })
@@ -42,7 +45,7 @@ public static class VillainsEndpoints
         
         group.MapGet("/", async ([FromServices] IGetAllVillains getAllVillains) =>
             {
-                var villains = await getAllVillains.ExecuteAsync();
+                var villains = await getAllVillains.ExecuteAsync(default);
 
                 return Results.Ok(villains);
             })

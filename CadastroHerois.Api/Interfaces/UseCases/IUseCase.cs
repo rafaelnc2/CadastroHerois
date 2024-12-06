@@ -1,6 +1,8 @@
-namespace CadastroHerois.Api.Interfaces;
+using CadastroHerois.Api.Outputs;
 
-public interface IUseCase
+namespace CadastroHerois.Api.Interfaces.UseCases;
+
+public interface IUseCase<in TInput, TOutput>
 {
-    Task ExecuteAsync<T>(T input);
+    Task<ApiDefaultOutput<TOutput>> ExecuteAsync(TInput input);
 }

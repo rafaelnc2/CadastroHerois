@@ -1,17 +1,19 @@
 using CadastroHerois.Api.Inputs;
+using CadastroHerois.Api.Inputs.Heores;
 using CadastroHerois.Api.Interfaces;
 using CadastroHerois.Api.Interfaces.Repositories;
 using CadastroHerois.Api.Outputs;
+using CadastroHerois.Api.Outputs.Heroes;
 
 namespace CadastroHerois.Api.UseCases.Heroes;
 
-public class UpdateHero(IHeroRepository repository) : IUpdateHero
+public sealed class UpdateHero(IHeroRepository repository) : IUpdateHero
 {
-    public async Task<ApiDefaultOutput<UpdateHeroOutput>> ExecuteAsync(int id, UpdateHeroInput input)
+    public async Task<ApiDefaultOutput<UpdateHeroOutput>> ExecuteAsync(UpdateHeroInput input)
     {
         var response = new ApiDefaultOutput<UpdateHeroOutput>();
         
-        var hero = await repository.GetByIdAsync(id);
+        var hero = await repository.GetByIdAsync(input.Id);
         
         hero.Update(input.Name, input.SecretName, input.Age, input.Universe);
 

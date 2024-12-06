@@ -1,5 +1,7 @@
 using CadastroHerois.Api.Inputs;
+using CadastroHerois.Api.Inputs.Heores;
 using CadastroHerois.Api.Interfaces;
+using CadastroHerois.Api.Interfaces.UseCases.Heroes;
 using CadastroHerois.Api.UseCases.Heroes;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,10 +22,11 @@ public static class HeroesEndpoints
         .WithName("CreateNewHeroAsync")
         .WithOpenApi();
         
-        group.MapPut("/{id:int}", async ([FromServices] IUpdateHero updateHero, int id, 
-                [FromBody] UpdateHeroInput input) =>
+        group.MapPut("/{id:int}", async ([FromServices] IUpdateHero updateHero, int id, [FromBody] UpdateHeroInput input) =>
             {
-                var updatedHero = await updateHero.ExecuteAsync(id, input);
+                input.SetId(id);
+                
+                var updatedHero = await updateHero.ExecuteAsync(input);
 
                 return Results.Ok(updatedHero);
             })
@@ -43,7 +46,7 @@ public static class HeroesEndpoints
         
         group.MapGet("/", async ([FromServices] IGetAllHeroes getAllHeroes) =>
             {
-                var heroes = await getAllHeroes.ExecuteAsync();
+                var heroes = await getAllHeroes.ExecuteAsync(default);
 
                 return Results.Ok(heroes);
             })

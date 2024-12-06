@@ -20,13 +20,13 @@ public class ApiDefaultOutput<T>
         Success = success;
     }
 
-    public ApiDefaultOutput(HttpStatusCode statusCode, bool sucesso, T data) : this(statusCode, sucesso) => Data = data;
+    public ApiDefaultOutput(HttpStatusCode statusCode, bool success, T data) : this(statusCode, success) => Data = data;
 
-    public ApiDefaultOutput(HttpStatusCode statusCode, bool sucesso, IEnumerable<string> erros) : this(statusCode, sucesso) =>
-        Errors = erros;
+    public ApiDefaultOutput(HttpStatusCode statusCode, bool success, IEnumerable<string> errors) : this(statusCode, success) =>
+        Errors = errors;
 
-    public ApiDefaultOutput(HttpStatusCode statusCode, bool sucesso, T data, IEnumerable<string> erros) : this(statusCode, sucesso, data) =>
-        Errors = erros;
+    public ApiDefaultOutput(HttpStatusCode statusCode, bool success, T data, IEnumerable<string> errors) : this(statusCode, success, data) =>
+        Errors = errors;
 
     public ApiDefaultOutput<T> OkResponse(T data) => new ApiDefaultOutput<T>(HttpStatusCode.OK, true, data);
 
@@ -34,5 +34,5 @@ public class ApiDefaultOutput<T>
 
     public ApiDefaultOutput<T> NotFoundResponse() => new ApiDefaultOutput<T>(HttpStatusCode.NotFound, true);
 
-    public ApiDefaultOutput<T> BadRequestResponse(IEnumerable<string> erros) => new ApiDefaultOutput<T>(HttpStatusCode.BadRequest, false, erros);
+    public ApiDefaultOutput<T> BadRequestResponse(IEnumerable<string> errors) => new ApiDefaultOutput<T>(HttpStatusCode.BadRequest, false, errors);
 }

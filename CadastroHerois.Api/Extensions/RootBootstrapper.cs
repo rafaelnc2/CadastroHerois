@@ -1,11 +1,12 @@
 using System.Data;
 using System.Data.SqlClient;
-using CadastroHerois.Api.Entities;
 using CadastroHerois.Api.Infra.Repositories;
 using CadastroHerois.Api.Interfaces;
 using CadastroHerois.Api.Interfaces.Repositories;
+using CadastroHerois.Api.Interfaces.UseCases.Heroes;
+using CadastroHerois.Api.Interfaces.UseCases.Villains;
 using CadastroHerois.Api.UseCases.Heroes;
-using CadastroHerois.Api.UseCases.Vilains;
+using CadastroHerois.Api.UseCases.Villains;
 
 namespace CadastroHerois.Api.Extensions;
 
