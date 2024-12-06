@@ -1,8 +1,5 @@
-using CadastroHerois.Api.Entities;
 using CadastroHerois.Api.Inputs.Villains;
-using CadastroHerois.Api.Interfaces.Repositories;
 using CadastroHerois.Api.Interfaces.UseCases.Villains;
-using CadastroHerois.Api.Outputs;
 
 namespace CadastroHerois.Api.UseCases.Villains;
 

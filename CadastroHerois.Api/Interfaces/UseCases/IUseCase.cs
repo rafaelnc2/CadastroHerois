@@ -1,5 +1,3 @@
-using CadastroHerois.Api.Outputs;
-
 namespace CadastroHerois.Api.Interfaces.UseCases;
 
 public interface IUseCase<in TInput, TOutput>

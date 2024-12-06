@@ -1,4 +1,3 @@
-using CadastroHerois.Api.Inputs;
 using CadastroHerois.Api.Inputs.Heores;
 
 namespace CadastroHerois.Api.Interfaces.UseCases.Heroes;
